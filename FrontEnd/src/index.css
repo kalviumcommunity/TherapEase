@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Gaegu";
+    src: url('./Fonts/Gaegu-Regular.ttf')
+}
+@font-face {
+    font-family: "Lato";
+    src: url('./Fonts/Lato-Regular.ttf')
+}
+@font-face {
+    font-family: "Mont";
+    src: url('./Fonts/Montserrat-Regular.ttf')
+}
+@font-face {
+    font-family: "Mont-b";
+    src: url('./Fonts/Montserrat-Bold.ttf')
+}
