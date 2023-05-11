@@ -1,5 +1,5 @@
 import tickmark from "../assets/tickmark.svg";
-import banner from "../assets/Banner.png";
+import banner from "../assets/banner.png";
 import TherapistDetailsMock from "../Mocks/TherapistDetailsMock.json";
 import TherapistCard from "../Components/TherapistCard";
 import { Link } from "react-router-dom";
