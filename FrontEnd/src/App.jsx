@@ -1,6 +1,6 @@
 import HomePage from "./Pages/HomePage";
 import SignInPage from "./Pages/SignInPage";
-import SignUpPage from "./Pages/signUpPage";
+import SignUpPage from "./Pages/SignUpPage";
 import ChatPage from "./Pages/ChatPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {

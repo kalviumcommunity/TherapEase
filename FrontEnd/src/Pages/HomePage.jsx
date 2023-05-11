@@ -1,5 +1,5 @@
 import tickmark from "../assets/tickmark.svg";
-import banner from "../assets/banner.png";
+import banner from "../assets/bannerimg.png";
 import TherapistDetailsMock from "../Mocks/TherapistDetailsMock.json";
 import TherapistCard from "../Components/TherapistCard";
 import { Link } from "react-router-dom";
@@ -82,7 +82,7 @@ function HomePage() {
         </div>
       </div>
       <div className="py-16 bg-slate-900 text-center" id="our-therapists">
-        <p className="font-Mont-b text-3xl leading-tight text-white mb-8">
+        <p className="font-Mont-b text-3xl leading-tight text-white mb-14">
           Our Therapists
         </p>
         <div className="flex justify-evenly">
