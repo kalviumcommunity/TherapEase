@@ -31,7 +31,7 @@ function HomePage() {
         <div className="absolute top-1/3 w-full flex justify-end">
           <div className=" w-2/5 mr-10">
             <div className="mb-6">
-              <p className="font-Mont-b text-5xl mb-4">
+              <p className="font-mont-b text-5xl mb-4">
                 A confidential space for your mental health needs.
               </p>
               <div className="font-lato">
@@ -55,7 +55,7 @@ function HomePage() {
       </div>
       <div className="w-full flex justify-around items-center my-20">
         <div className="w-1/3 flex flex-col items-end justify-around">
-          <div className="font-Mont-b text-5xl leading-tight">
+          <div className="font-mont-b text-5xl leading-tight">
             <span className="block">Transform Your</span>
             <span className="block">Life with</span>
             <span className="block">TherapEase</span>
@@ -82,7 +82,7 @@ function HomePage() {
         </div>
       </div>
       <div className="py-16 bg-slate-900 text-center" id="our-therapists">
-        <p className="font-Mont-b text-3xl leading-tight text-white mb-14">
+        <p className="font-mont-b text-3xl leading-tight text-white mb-14">
           Our Therapists
         </p>
         <div className="flex justify-evenly">
