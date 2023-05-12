@@ -22,6 +22,11 @@ function SignUpPage() {
     setPasswordError("");
     setConfirmPasswordError("");
 
+    const validateEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
     if (!name) {
       setNameError("Name cannot be empty");
     }
@@ -30,7 +35,7 @@ function SignUpPage() {
     }
     if (!email) {
       setEmailError("Email cannot be empty");
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!validateEmail(email)) {
       setEmailError("Invalid email address");
     }
     if (!password) {
@@ -44,7 +49,7 @@ function SignUpPage() {
       setConfirmPasswordError("Passwords do not match");
     }
 
-    if (name || dob || email || password || confirmPassword) {
+    if (name && dob && email && password && confirmPassword) {
       console.log(
         `name:${name},dob:${dob},email:${email},password:${password},confrim password:${confirmPassword}`
       );
