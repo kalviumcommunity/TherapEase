@@ -85,7 +85,7 @@ function HomePage() {
         <p className="font-mont-b text-3xl leading-tight text-white mb-14">
           Our Therapists
         </p>
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly flex-wrap gap-10">
           {TherapistDetailsMock.map((therapist) => (
             <TherapistCard
               key={therapist.name}
@@ -94,6 +94,7 @@ function HomePage() {
               jobTitle={therapist.jobTitle}
               specialties={therapist.specialties}
               languages={therapist.languages}
+              isLoggedIn={false}
             />
           ))}
         </div>
