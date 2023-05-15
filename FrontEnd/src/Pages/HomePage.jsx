@@ -21,10 +21,16 @@ function HomePage() {
           </div>
           <div className="flex items-center">
             <div>
-              <Link to="/SignIn"><div className="text-sm font-medium mr-14">Sign In</div></Link>
+              <Link to="/SignIn">
+                <div className="text-sm font-medium mr-14">Sign In</div>
+              </Link>
             </div>
             <div>
-              <Link to="/SignUp"><div className="text-white px-5 py-3 rounded text-sm font-medium bg-zinc-900">Sign Up</div></Link>
+              <Link to="/SignUp">
+                <div className="text-white px-5 py-3 rounded text-sm font-medium bg-zinc-900">
+                  Sign Up
+                </div>
+              </Link>
             </div>
           </div>
         </div>
