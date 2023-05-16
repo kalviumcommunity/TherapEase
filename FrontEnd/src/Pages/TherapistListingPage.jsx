@@ -23,7 +23,7 @@ function TherapistListingPage() {
               jobTitle={therapist.jobTitle}
               specialties={therapist.specialties}
               languages={therapist.languages}
-              isLoggedIn={true}
+              isLoggedIn={true}// TODO: Change this value once the backend integration is complete.
             />
           ))}
         </div>
