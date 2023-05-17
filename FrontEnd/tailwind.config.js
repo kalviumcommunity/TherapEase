@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         gunmetal: "#292b37",
-        arsenic: "#3b3d49"
+        arsenic: "#3b3d49",
       },
       fontFamily: {
         gaegu: ["Gaegu", "sans-serif"],
@@ -15,6 +15,9 @@ export default {
       },
       backgroundImage: {
         backgroundImage: "url('./src/assets/Banner.png')",
+      },
+      maxWidth: {
+        "50%": "50%",
       },
     },
   },

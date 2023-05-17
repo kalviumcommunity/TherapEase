@@ -6,11 +6,9 @@ function SignUpPage() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [nameError, setNameError] = useState("");
-  const [dobError, setDobError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
@@ -18,7 +16,6 @@ function SignUpPage() {
   const handleSignUp = () => {
     setNameError("");
     setEmailError("");
-    setDobError("");
     setPasswordError("");
     setConfirmPasswordError("");
 
@@ -29,9 +26,6 @@ function SignUpPage() {
 
     if (!name) {
       setNameError("Name cannot be empty");
-    }
-    if (!dob) {
-      setDobError("DOB cannot be empty");
     }
     if (!email) {
       setEmailError("Email cannot be empty");
@@ -49,9 +43,9 @@ function SignUpPage() {
       setConfirmPasswordError("Passwords do not match");
     }
 
-    if (name && dob && email && password && confirmPassword) {
+    if (name && email && password && confirmPassword) {
       console.log(
-        `name:${name},dob:${dob},email:${email},password:${password},confrim password:${confirmPassword}`
+        `name:${name},email:${email},password:${password},confrim password:${confirmPassword}`
       );
       navigate("/SignIn");
     }
@@ -91,17 +85,6 @@ function SignUpPage() {
                 onChange={(e) => setName(e.target.value)}
               />
               <div className="text-red-500 text-sm h-4">{nameError}</div>
-            </div>
-            <div className="mb-2">
-              <input
-                className="font-lato appearance-none border border-gray-300 rounded py-3 px-3 w-72 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-black"
-                id="dob"
-                type="date"
-                placeholder="DOB"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-              />
-              <div className="text-red-500 text-sm h-4">{dobError}</div>
             </div>
             <div className="mb-2">
               <input

@@ -81,7 +81,7 @@ function SignInPage() {
         <div className="w-3/12 h-4/6 rounded-tr-lg rounded-br-lg text-white flex flex-col justify-center items-center bg-indigo-600 border-8 border-white">
           <div className="font-mont-b text-3xl mb-4">Hello, There!</div>
           <div className="font-mont text-base font-semibold mb-8">
-            Dont have an account? Sign Up
+            Don&apos;t have an account? Sign Up
           </div>
           <div>
             <Link to="/SignUp">

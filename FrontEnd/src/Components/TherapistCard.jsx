@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-function TherapistCard({ name, pictureUrl, jobTitle, specialties, languages, isLoggedIn }) {
+function TherapistCard({
+  name,
+  pictureUrl,
+  jobTitle,
+  specialties,
+  languages,
+  isLoggedIn,
+}) {
   return (
     <div className="bg-slate-800 rounded-lg p-4 flex flex-col items-center w-72 h-96 overflow-hidden">
       <div
@@ -28,7 +35,7 @@ function TherapistCard({ name, pictureUrl, jobTitle, specialties, languages, isL
             {languages && languages.slice(0, 3).join(", ")}
           </p>
         </div>
-        <Link to={isLoggedIn?"/Chat":"/SignIn"}>
+        <Link to={isLoggedIn ? "/Chat" : "/SignIn"}>
           <button className="bg-green-500 hover:bg-green-600 text-white font-Mont-b font-medium py-2 px-4 rounded text-center">
             Chat Now
           </button>
@@ -43,6 +50,6 @@ TherapistCard.propTypes = {
   jobTitle: PropTypes.string.isRequired,
   specialties: PropTypes.array.isRequired,
   languages: PropTypes.array.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 export default TherapistCard;
