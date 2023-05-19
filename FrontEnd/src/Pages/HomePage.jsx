@@ -1,10 +1,32 @@
+import { useState, useEffect } from "react";
 import tickmark from "../assets/tickmark.svg";
 import banner from "../assets/bannerimg.png";
-import TherapistDetailsMock from "../Mocks/TherapistDetailsMock.json";
 import TherapistCard from "../Components/TherapistCard";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function HomePage() {
+  const [therapists, setTherapists] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/therapists")
+      .then(response => {
+        setTherapists(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching therapists:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+    setIsLoggedIn(!!token);
+  }, []);
+  
+
   return (
     <div>
       <div>
@@ -92,7 +114,7 @@ function HomePage() {
           Our Therapists
         </p>
         <div className="flex justify-evenly flex-wrap gap-10">
-          {TherapistDetailsMock.map((therapist) => (
+          {therapists.map((therapist) => (
             <TherapistCard
               key={therapist.name}
               name={therapist.name}
@@ -100,7 +122,7 @@ function HomePage() {
               jobTitle={therapist.jobTitle}
               specialties={therapist.specialties}
               languages={therapist.languages}
-              isLoggedIn={false}
+              isLoggedIn={isLoggedIn}
             />
           ))}
         </div>
