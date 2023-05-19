@@ -3,16 +3,19 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ChatNameCard from "../Components/ChatNameCard";
 import ChatMock from "../Mocks/ChatMock.json";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Switch from "@mui/material/Switch";
 import SendIcon from "@mui/icons-material/Send";
+import Cookies from "js-cookie";
 
 function ChatPage() {
   const accName = "Zaid";
   const [selectedCardIndex, setSelectedCardIndex] = useState(-1);
   const [selectedChatName, setSelectedChatName] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+  const isLoggedIn = Cookies.get("jwt") !== undefined;
 
   const initials = getInitials(selectedChatName);
 
@@ -25,9 +28,11 @@ function ChatPage() {
         : selectedChat.user1_id;
     setSelectedChatName(currentUser);
   };
+
   function getInitials(Name) {
     return Name.charAt(0).toUpperCase();
   }
+
   const handleSendClick = () => {
     console.log(inputValue);
     setInputValue("");
@@ -42,6 +47,29 @@ function ChatPage() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  const handleLogout = () => {
+    Cookies.remove("jwt");
+    navigate("/");
+  };
+
+  const handleLoginButton = () => {
+    navigate("/SignIn");
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gunmetal text-white">
+        <p>Please sign in before accessing the chat page.</p>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-600 rounded"
+          onClick={handleLoginButton}
+        >
+          Sign In
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="w-screen h-screen bg-gunmetal flex">
       <div className="w-1/5 h-screen border-r">
@@ -76,9 +104,7 @@ function ChatPage() {
             <p className="ml-3 font-mont-b">Zaid</p>
           </div>
           <div>
-            <Link to="/">
-              <LogoutIcon className="cursor-pointer" />
-            </Link>
+              <LogoutIcon className="cursor-pointer" onClick={()=>handleLogout()}/>
           </div>
         </div>
       </div>

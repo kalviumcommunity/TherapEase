@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -44,10 +45,14 @@ function SignUpPage() {
     }
 
     if (name && email && password && confirmPassword) {
-      console.log(
-        `name:${name},email:${email},password:${password},confrim password:${confirmPassword}`
-      );
-      navigate("/SignIn");
+      axios
+        .post("http://localhost:8080/api/signup", { name, email, password })
+        .then(() => {
+          navigate("/SignIn");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     }
   };
 

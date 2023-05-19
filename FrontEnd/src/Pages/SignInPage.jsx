@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie"
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -18,19 +20,30 @@ function SignInPage() {
     setEmailError("");
     setpasswordError("");
     if (!email) {
-      setEmailError("Please enter a email address.");
+      setEmailError("Please enter an email address.");
     } else if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address.");
     }
     if (!password) {
-      setpasswordError("Please enter the password");
+      setpasswordError("Please enter the password.");
     }
     if (email && password) {
-      console.log(`Email: ${email}, Password: ${password}`);
-      navigate("/chat");
+      axios
+        .post("http://localhost:8080/api/signin", { email, password })
+        .then((response) => {
+          const token = response.data.token;
+          Cookies.set('jwt', token, { path: '/', secure: true, sameSite: 'strict' });
+          navigate("/chat");
+        })
+        .catch((error) => {
+          if (error.isAxiosError) {
+            setpasswordError(error.response?.data?.message);
+          } else {
+            console.log(error);
+          }
+        });
     }
   };
-
   return (
     <div className="w-full h-screen bg-slate-300">
       <div className="absolute top-6 left-10 font-gaegu font-bold text-3xl">
