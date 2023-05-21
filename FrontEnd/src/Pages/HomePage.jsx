@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 function HomePage() {
   const [therapists, setTherapists] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  Cookies.remove("jwt");
 
   useEffect(() => {
     axios

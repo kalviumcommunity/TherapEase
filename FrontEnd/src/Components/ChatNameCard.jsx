@@ -6,7 +6,6 @@ function ChatNameCard({ name, lastMessage, isSelected, onSelect }) {
   function getInitials(name) {
     return name.charAt(0).toUpperCase();
   }
-
   const message =
     lastMessage.length > 20 ? lastMessage.slice(0, 20) + "..." : lastMessage;
 
