@@ -4,7 +4,7 @@ const port = 8080;
 const cors = require("cors");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+require('dotenv').config();
 const WebSocket = require("ws");
 
 const signUpMockPath = "../FrontEnd/src/Mocks/SignUpMock.json";
@@ -72,7 +72,7 @@ app.post("/api/signin", (req, res) => {
     return res.status(401).json({ message: "Invalid email or password" });
   }
 
-  const secretKey = crypto.randomBytes(32).toString("hex");
+  const secretKey = process.env.JWT_SECRET
   const payload = { name: user.name, email: user.email };
   const options = { expiresIn: "1h" };
   const token = jwt.sign(payload, secretKey, options);
@@ -94,7 +94,6 @@ app.post("/api/saveChat", (req, res) => {
 
 app.post("/api/addChat", (req, res) => {
   const chatData = req.body;
-  console.log(req);
   const existingChat = chatMock.find(
     (chat) =>
       (chat.user1_id === chatData.user1_id &&
@@ -131,8 +130,6 @@ app.post("/api/addChat", (req, res) => {
           console.error("Error writing to ChatMock.json:", writeErr);
           return res.status(500).json({ message: "Internal server error" });
         }
-
-        console.log("Data written to ChatMock.json successfully");
         return res.status(200).json({ message: "Chat added successfully" });
       }
     );

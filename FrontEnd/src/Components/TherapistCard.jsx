@@ -33,12 +33,12 @@ function TherapistCard({
             "Content-Type": "application/json",
           },
         })
-        .then((response) => {
-          console.log(response.data.message);
+        .then(() => {
           navigate("/chat");
         })
         .catch((error) => {
           console.log(error);
+          navigate("/chat");
         });
     } else {
       navigate("/signin");
