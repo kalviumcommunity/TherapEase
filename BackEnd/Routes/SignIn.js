@@ -18,7 +18,7 @@ router.post("/signin", async (req, res) => {
     }
 
     const secretKey = process.env.JWT_SECRET;
-    const payload = { name: user.name, email: user.email };
+    const payload = { name: user.name, email: user.email, _id:user._id };
     const options = { expiresIn: "1h" };
     const token = jwt.sign(payload, secretKey, options);
 

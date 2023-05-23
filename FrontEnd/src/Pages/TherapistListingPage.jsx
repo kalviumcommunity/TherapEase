@@ -10,18 +10,17 @@ function TherapistListingPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get('jwt');
+    const token = Cookies.get("jwt");
     setIsLoggedIn(!!token);
   }, []);
-  
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/therapists")
-      .then(response => {
+      .get(import.meta.env.VITE_API_URL + "/api/therapists")
+      .then((response) => {
         setTherapists(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching therapists:", error);
       });
   }, []);
@@ -38,7 +37,7 @@ function TherapistListingPage() {
           Our Therapists
         </p>
         <div className="flex justify-evenly flex-wrap gap-10">
-          {therapists.map(therapist => (
+          {therapists.map((therapist) => (
             <TherapistCard
               key={therapist.name}
               name={therapist.name}

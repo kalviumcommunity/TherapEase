@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -30,10 +30,14 @@ function SignInPage() {
     }
     if (email && password) {
       axios
-        .post("http://localhost:8080/api/signin", { email, password })
+        .post(import.meta.env.VITE_API_URL + "/api/signin", { email, password })
         .then((response) => {
           const token = response.data.token;
-          Cookies.set('jwt', token, { path: '/', secure: true, sameSite: 'strict' });
+          Cookies.set("jwt", token, {
+            path: "/",
+            secure: true,
+            sameSite: "strict",
+          });
           navigate("/chat");
         })
         .catch((error) => {

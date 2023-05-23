@@ -29,7 +29,7 @@ function ChatPage() {
   useEffect(() => {
     if (isLoggedIn) {
       axios
-        .get("http://localhost:8080/api/chats")
+        .get(import.meta.env.VITE_API_URL + "/api/chats")
         .then((response) => {
           setChatData(response.data);
         })
@@ -55,7 +55,7 @@ function ChatPage() {
           (chat.user1_id === accName && chat.user2_id === selectedChatName) ||
           (chat.user1_id === selectedChatName && chat.user2_id === accName)
       );
-  
+
       if (selectedChat) {
         const newMessage = {
           message_id: `msg00${selectedChat.messages.length + 1}`,
@@ -68,14 +68,14 @@ function ChatPage() {
           }),
           message_text: inputValue,
         };
-  
+
         selectedChat.messages.push(newMessage);
-  
+
         axios
-          .post("http://localhost:8080/api/saveChat", {
+          .post(import.meta.env.VITE_API_URL + "/api/saveChat", {
             user1Name: accName,
             user2Name: selectedChatName,
-            newMessage: newMessage
+            newMessage: newMessage,
           })
           .then((response) => {
             console.log(response.data.message);
@@ -86,7 +86,7 @@ function ChatPage() {
           });
       }
     }
-  };  
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

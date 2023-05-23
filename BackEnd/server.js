@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 8080;
-require('dotenv').config({ path: "../.env" });
+require("dotenv").config();
 const WebSocket = require("ws");
 const dbConnection = require("./DB/Connection");
 
@@ -30,7 +30,6 @@ app.use("/api", chatsRouter);
 app.listen(port, () => {
   console.log(`App listening to the port ${port}`);
 });
-
 
 const wss = new WebSocket.Server({ port: 2507 });
 
