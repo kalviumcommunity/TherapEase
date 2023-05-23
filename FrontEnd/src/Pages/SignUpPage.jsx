@@ -48,7 +48,11 @@ function SignUpPage() {
 
     if (name && email && password && confirmPassword) {
       axios
-        .post("http://localhost:8080/api/signup", { name, email, password })
+        .post(import.meta.env.VITE_API_URL + "/api/signup", {
+          name,
+          email,
+          password,
+        })
         .then(() => {
           navigate("/SignIn");
         })

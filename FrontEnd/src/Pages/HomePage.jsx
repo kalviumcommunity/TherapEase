@@ -13,20 +13,19 @@ function HomePage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/therapists")
-      .then(response => {
+      .get(import.meta.env.VITE_API_URL + "/api/therapists")
+      .then((response) => {
         setTherapists(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching therapists:", error);
       });
   }, []);
 
   useEffect(() => {
-    const token = Cookies.get('jwt');
+    const token = Cookies.get("jwt");
     setIsLoggedIn(!!token);
   }, []);
-  
 
   return (
     <div>

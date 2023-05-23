@@ -27,7 +27,7 @@ function TherapistCard({
       };
 
       axios
-        .post("http://localhost:8080/api/addChat", chat)
+        .post(import.meta.env.VITE_API_URL + "/api/addChat", chat)
         .then(() => {
           navigate("/chat");
         })
