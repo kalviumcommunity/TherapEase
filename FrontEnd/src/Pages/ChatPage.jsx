@@ -1,7 +1,6 @@
 import AddChatIcon from "@mui/icons-material/AddComment";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChatNameCard from "../Components/ChatNameCard";
-import chatData from "../Mocks/ChatMock.json";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
@@ -17,12 +16,26 @@ function ChatPage() {
   const navigate = useNavigate();
   const isLoggedIn = Cookies.get("jwt") !== undefined;
   const initials = getInitials(selectedChatName);
+  const [chatData, setChatData] = useState([]);
 
   useEffect(() => {
     if (isLoggedIn) {
       const token = Cookies.get("jwt");
       const decodedToken = jwt_decode(token);
       setAccName(decodedToken.name);
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios
+        .get("http://localhost:8080/api/chats")
+        .then((response) => {
+          setChatData(response.data);
+        })
+        .catch((error) => {
+          console.error("Error retrieving chats:", error);
+        });
     }
   }, [isLoggedIn]);
 
@@ -42,7 +55,7 @@ function ChatPage() {
           (chat.user1_id === accName && chat.user2_id === selectedChatName) ||
           (chat.user1_id === selectedChatName && chat.user2_id === accName)
       );
-
+  
       if (selectedChat) {
         const newMessage = {
           message_id: `msg00${selectedChat.messages.length + 1}`,
@@ -55,11 +68,15 @@ function ChatPage() {
           }),
           message_text: inputValue,
         };
-
+  
         selectedChat.messages.push(newMessage);
-
+  
         axios
-          .post("http://localhost:8080/api/saveChat", chatData)
+          .post("http://localhost:8080/api/saveChat", {
+            user1Name: accName,
+            user2Name: selectedChatName,
+            newMessage: newMessage
+          })
           .then((response) => {
             console.log(response.data.message);
             setInputValue("");
@@ -69,7 +86,7 @@ function ChatPage() {
           });
       }
     }
-  };
+  };  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
