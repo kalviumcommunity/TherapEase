@@ -1,83 +1,41 @@
 const express = require("express");
 const app = express();
-const port = 8080;
 const cors = require("cors");
-const fs = require("fs");
-const jwt = require("jsonwebtoken")
-const crypto = require('crypto');
-
-const signUpMockPath = "../FrontEnd/src/Mocks/SignUpMock.json";
-const therapistDetailsMock = require("../FrontEnd/src/Mocks/TherapistDetailsMock.json");
+const port = 8080;
+require('dotenv').config({ path: "../.env" });
+const WebSocket = require("ws");
+const dbConnection = require("./DB/Connection");
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/therapists", (req, res) => {
-  res.json(therapistDetailsMock);
-});
+const therapistsRouter = require("./Routes/Therapist");
+app.use("/api", therapistsRouter);
 
-app.post("/api/signup", (req, res) => {
-  const { name, email, password } = req.body;
+const signUpRouter = require("./Routes/SignUp");
+app.use("/api", signUpRouter);
 
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "Please fill in all the fields" });
-  }
+const signInRouter = require("./Routes/SignIn");
+app.use("/api", signInRouter);
 
-  const newAccount = { name, email, password };
+const saveChatRouter = require("./Routes/SaveChat");
+app.use("/api", saveChatRouter);
 
-  let signUpData = [];
-  try {
-    signUpData = require(signUpMockPath);
-  } catch (err) {
-    console.error("Error reading SignUpMock.json:", err);
-    return res.status(500).json({ message: "Internal server error" });
-  }
+const addChatRouter = require("./Routes/AddChat");
+app.use("/api", addChatRouter);
 
-  signUpData.push(newAccount);
-
-  fs.writeFile(signUpMockPath, JSON.stringify(signUpData, null, 2), (err) => {
-    if (err) {
-      console.error("Error writing to SignUpMock.json:", err);
-      return res.status(500).json({ message: "Internal server error" });
-    }
-    res.json({ message: "Account created successfully" });
-  });
-});
-
-app.post("/api/signin", (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "Please fill in all the fields" });
-  }
-
-  let signUpData = [];
-  try {
-    signUpData = require(signUpMockPath);
-  } catch (err) {
-    console.error("Error reading SignUpMock.json:", err);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-
-  const user = signUpData.find((account) => account.email === email);
-
-  if (!user) {
-    return res.status(401).json({ message: "Invalid email or password" });
-  }
-
-  if (user.password !== password) {
-    return res.status(401).json({ message: "Invalid email or password" });
-  }
-
-  const secretKey = crypto.randomBytes(32).toString('hex');
-  const payload = { userId: user.id, email: user.email };
-  const options = { expiresIn: "1h" };
-  const token = jwt.sign(payload, secretKey, options);
-
-  res.json({ message: "Sign in successful", token: token });
-});
-
+const chatsRouter = require("./Routes/Chats");
+app.use("/api", chatsRouter);
 
 app.listen(port, () => {
   console.log(`App listening to the port ${port}`);
+});
+
+
+const wss = new WebSocket.Server({ port: 2507 });
+
+wss.on("connection", function (ws) {
+  ws.on("message", function (data) {
+    ws.send(data);
+  });
 });

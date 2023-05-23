@@ -10,6 +10,7 @@ function SignInPage() {
   const [password, setPassword] = useState("");
   const [passwordError, setpasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  Cookies.remove("jwt");
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
