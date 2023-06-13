@@ -44,37 +44,36 @@ function TherapistCard({
       navigate("/signin");
     }
   };
-  
 
   return (
-    <div className="bg-slate-800 rounded-lg p-4 flex flex-col items-center w-72 h-96 overflow-hidden">
-      <div
-        className="rounded-full h-32 w-32 bg-gray-400 flex items-center justify-center"
-        style={{ height: "8rem", width: "8rem" }}
-      >
+    <div className="bg-slate-800 rounded-lg p-4 flex flex-col items-center w-84 h-118 overflow-hidden">
+      <div className="rounded-full h-32 w-32 bg-gray-400 flex items-center justify-center mt-4 mb-4">
         <img
           src={pictureUrl}
           alt="Profile"
           className="h-full w-full object-cover rounded-full"
+          style={{ height: "8rem", width: "8rem" }}
         />
       </div>
       <div className="flex-1">
-        <p className="font-Mont-b text-white">{name}</p>
-        <p className="text-gray-400 text-sm mb-2 font-lato">{jobTitle}</p>
-        <div className="mb-5">
-          <span className="text-white font-medium mb-2">Specialties</span>
-          <p className="text-gray-300 text-sm font-lato">
+        <p className="font-Mont-b text-white text-xl font-bold">{name}</p>
+        <p className="text-white text-sm mb-4 font-lato">{jobTitle}</p>
+        <div className="mb-4">
+          <span className="text-gray-400 font-regular text-sm">
+            Specialties
+          </span>
+          <p className="text-white text-base font-lato">
             {specialties && specialties.slice(0, 3).join(", ")}
           </p>
         </div>
-        <div className="mb-5">
-          <h3 className="text-white font-medium mb-2">Languages</h3>
-          <p className="text-gray-300 text-sm font-lato">
+        <div className="mb-4">
+          <h3 className="text-gray-400 font-regular text-sm">Languages</h3>
+          <p className="text-white text-base font-lato">
             {languages && languages.slice(0, 3).join(", ")}
           </p>
         </div>
         <button
-          className="bg-green-500 hover:bg-green-600 text-white font-Mont-b font-medium py-2 px-4 rounded text-center"
+          className="bg-green-500 hover:bg-green-600 text-white font-Mont-b font-medium py-2 px-4 mt-2 rounded text-center"
           onClick={handleChatClick}
         >
           Chat Now
